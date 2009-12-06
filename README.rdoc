@@ -2,6 +2,16 @@
 
 == The simplest Rails test factory ever.
 
+== Install
+
+braid add git://github.com/brentgreeff/hash_factory.git -p
+
+Add this line to the top of test/test_helper.rb
+
+      require 'test_help' # this should already be here
+      HashFactory.setup
+
+
 == Lets start with the calling code
 
 I like to setup my test data, right there in the
@@ -59,15 +69,25 @@ automatically become available in your tests.
 
 Add as many or as few files as you like.
 
-If you read this far you may be thinking its not much
-of a plugin, bit lacking in the old features department.
+The advantage of using this plugin is you can build your objects any way you like.
 
-It's got one major advantage though:
-
-You can build your objects any way you like.
-
-Oh and dont worry about protected attributes
+Don't worry about protected attributes
 the 'build' method handles it for you.
+
+Get some factory love in the console.
+
+Call
+
+      require 'hash_factory'
+      HashFactory.load_in(self)
+
+Or event better
+
+copy the file:
+
+      config/initializers/factory_in_console.rb
+
+and it's always there waiting for you.
 
 
 Copyright (c) 2009 [Brent Greeff], released under the MIT license
