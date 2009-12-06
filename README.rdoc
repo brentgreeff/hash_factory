@@ -1,0 +1,73 @@
+= HashFactory
+
+== The simplest Rails test factory ever.
+
+== Lets start with the calling code
+
+I like to setup my test data, right there in the
+test where everyone can see it.
+
+* Along the lines of
+
+      test "A User with a blank last name should be invalid" do
+        @user = create_user :last_name => ''
+        assert @user.invalid?
+      end
+
+== A few things to notice:
+
+I don't call Factory.create_user.
+All that 'Factory' typing just adds noise and makes my fingers sore.
+
+I define the arguments relevant to the test explicitly.
+I dont need to look at the implementation to see if the user has a last_name.
+
+I assume the factory handles the rest and passes me a 'VALID' instance.
+
+== Test things in isolation
+A factory that returns an invalid instance will eventually cause a failure that ripples
+through your test code. Face slapping will ensue.
+
+
+== How does it work?
+
+* create a factories directory:
+      
+      mkdir test/factories
+
+Add a module to this folder and the methods
+automatically become available in your tests.
+
+* Mine tend to look like this:
+      
+      module UserFactory
+        
+        def create_user(options={})
+          build :user, user_options(options)
+        end
+        
+        def user_options(options={})
+          {
+            :first_name => 'Jim',
+            :last_name => 'Bean',
+            :email => "jim@example.com",
+            :account => options[:account] || create_account
+          }.merge(options)
+        end
+      end
+
+
+Add as many or as few files as you like.
+
+If you read this far you may be thinking its not much
+of a plugin, bit lacking in the old features department.
+
+It's got one major advantage though:
+
+You can build your objects any way you like.
+
+Oh and dont worry about protected attributes
+the 'build' method handles it for you.
+
+
+Copyright (c) 2009 [Brent Greeff], released under the MIT license
