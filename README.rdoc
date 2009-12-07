@@ -74,7 +74,13 @@ The advantage of using this plugin is you can build your objects any way you lik
 Don't worry about protected attributes
 the 'build' method handles it for you.
 
-Get some factory love in the console.
+=== Pluralization Issues
+
+Be sure to update your 'initializers/inflections.rb'
+If you get an Constant missing error when loading a factory.
+
+
+=== Factory love in the console.
 
 Call
 
