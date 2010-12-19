@@ -22,6 +22,6 @@ class HashFactory
   end
   
   def self.factories_path
-    "#{RAILS_ROOT}/test/factories"
+    "#{Rails.root}/test/factories"
   end
 end
