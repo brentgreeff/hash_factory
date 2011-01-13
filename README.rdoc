@@ -1,6 +1,6 @@
 = HashFactory
 
-== The simplest Rails test factory ever.
+== Light-weight Rails test factory
 
 == Install
 
