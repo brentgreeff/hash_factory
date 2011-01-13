@@ -4,7 +4,7 @@
 
 == Install
 
-braid add git://github.com/brentgreeff/hash_factory.git -p
+      gem install hash_factory
 
 Add this line to the top of test/test_helper.rb
 
@@ -14,8 +14,7 @@ Add this line to the top of test/test_helper.rb
 
 == Lets start with the calling code
 
-I like to setup my test data, right there in the
-test where everyone can see it.
+I like to setup my test data in the test.
 
 * Along the lines of
 
@@ -26,8 +25,8 @@ test where everyone can see it.
 
 == A few things to notice:
 
-I don't call Factory.create_user.
-All that 'Factory' typing just adds noise and makes my fingers sore.
+No Factory calls, these methods are global to the test,
+do I really need the namespace, will I ever need a SomethingElse.create_user
 
 I define the arguments relevant to the test explicitly.
 I dont need to look at the implementation to see if the user has a last_name.
@@ -36,10 +35,10 @@ I assume the factory handles the rest and passes me a 'VALID' instance.
 
 == Test things in isolation
 A factory that returns an invalid instance will eventually cause a failure that ripples
-through your test code. Face slapping will ensue.
+through your test code.
 
 
-== How does it work?
+== How to use it
 
 * create a factories directory:
       
