@@ -1,7 +1,5 @@
-> [\!CAUTION]
-> This repository is deprecated and no longer maintained.
-
-# HashFactory
+> [!CAUTION]
+> This repository is deprecated and no longer maintained.# HashFactory
 
 ## Light-weight Rails test factory
 
