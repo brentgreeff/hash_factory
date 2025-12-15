@@ -1,7 +1,7 @@
-> [!CAUTION]
+> [\!CAUTION]
 > This repository is deprecated and no longer maintained.
 
-= HashFactory
+# HashFactory
 
 ## Light-weight Rails test factory
 
@@ -35,9 +35,8 @@ the implementation to see if the user has a last_name.
 
 I assume the factory handles the rest and passes me a 'VALID' instance.
 
-## Test things in isolation
-A factory that returns an invalid instance will eventually cause a failure
-that ripples through your test code.
+## Test things in isolation A factory that returns an invalid instance will
+eventually cause a failure that ripples through your test code.
 
 ## How to use it
 
