@@ -3,99 +3,94 @@
 
 = HashFactory
 
-== Light-weight Rails test factory
+## Light-weight Rails test factory
 
-== Install
+## Install
 
-      gem install hash_factory
+    gem install hash_factory
 
 Add this line to the top of test/test_helper.rb
 
-      require 'test_help' # this should already be here
-      HashFactory.setup
+    require 'test_help' # this should already be here
+    HashFactory.setup
 
-
-== Lets start with the calling code
+## Lets start with the calling code
 
 I like to setup my test data in the test.
 
-* Along the lines of
+*   Along the lines of
 
-      test "A User with a blank last name should be invalid" do
-        @user = create_user :last_name => ''
-        assert @user.invalid?
-      end
+        test "A User with a blank last name should be invalid" do
+          @user = create_user :last_name => ''
+          assert @user.invalid?
+        end
 
-== A few things to notice:
+## A few things to notice:
 
-No Factory calls, these methods are global to the test,
-do I really need the namespace, will I ever need a SomethingElse.create_user
+No Factory calls, these methods are global to the test, do I really need the
+namespace, will I ever need a SomethingElse.create_user
 
-I define the arguments relevant to the test explicitly.
-I dont need to look at the implementation to see if the user has a last_name.
+I define the arguments relevant to the test explicitly. I dont need to look at
+the implementation to see if the user has a last_name.
 
 I assume the factory handles the rest and passes me a 'VALID' instance.
 
-== Test things in isolation
-A factory that returns an invalid instance will eventually cause a failure that ripples
-through your test code.
+## Test things in isolation
+A factory that returns an invalid instance will eventually cause a failure
+that ripples through your test code.
 
+## How to use it
 
-== How to use it
+*   create a factories directory:
 
-* create a factories directory:
-      
-      mkdir test/factories
+        mkdir test/factories
 
-Add a module to this folder and the methods
-automatically become available in your tests.
+Add a module to this folder and the methods automatically become available in
+your tests.
 
-* Mine tend to look like this:
-      
-      module UserFactory
-        
-        def create_user(options={})
-          build :user, user_options(options)
+*   Mine tend to look like this:
+
+        module UserFactory
+
+          def create_user(options={})
+            build :user, user_options(options)
+          end
+
+          def user_options(options={})
+            {
+              :first_name => 'Jim',
+              :last_name => 'Bean',
+              :email => "jim@example.com",
+              :account => options[:account] || create_account
+            }.merge(options)
+          end
         end
-        
-        def user_options(options={})
-          {
-            :first_name => 'Jim',
-            :last_name => 'Bean',
-            :email => "jim@example.com",
-            :account => options[:account] || create_account
-          }.merge(options)
-        end
-      end
-
 
 Add as many or as few files as you like.
 
-The advantage of using this plugin is you can build your objects any way you like.
+The advantage of using this plugin is you can build your objects any way you
+like.
 
-Don't worry about protected attributes
-the 'build' method handles it for you.
+Don't worry about protected attributes the 'build' method handles it for you.
 
-=== Pluralization Issues
+### Pluralization Issues
 
-Be sure to update your 'initializers/inflections.rb'
-If you get an Constant missing error when loading a factory.
+Be sure to update your 'initializers/inflections.rb' If you get an Constant
+missing error when loading a factory.
 
-
-=== Factory love in the console.
+### Factory love in the console.
 
 Call
 
-      require 'hash_factory'
-      HashFactory.load_in(self)
+    require 'hash_factory'
+    HashFactory.load_in(self)
 
 Or event better
 
 copy the file:
 
-      config/initializers/factory_in_console.rb
+    config/initializers/factory_in_console.rb
 
 and it's always there waiting for you.
-
 
 Copyright (c) 2009 [Brent Greeff], released under the MIT license
